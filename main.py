@@ -45,13 +45,31 @@ while True:
          print("the password is : " + x[3])
       
    if user_choice ==4 :
-      print("Enter the user name or any information regarding the record\n")
-      delete = input()
-      sql = "delete from passwordmanager where emailid= %s"
-      val =(delete,)
-      mycursor.execute(sql,val)
-      mydb.commit()
-      print("the record has been deleted\n")  
+        print("Enter the user name or any information regarding the record\n")
+         delete =str(input())
+         sql="select * from passwordmanager where weba = %s"
+         val =(delete,)
+         mycursor.execute(sql,val)
+         x=mycursor.fetchall()
+         print(x)
+         a=0
+         for y in x:
+            a=a+1
+         print("the number of the multiple records is",str(a))
+         if a == 1 :
+            sql = "delete from passwordmanager where weba= %s"
+            val =(delete,)
+            mycursor.execute(sql,val)
+            mydb.commit()
+            print("the record has been deleted\n") 
+         else :
+            print("there are " + str(a) + " identical records so please provide more info regarding your email address")
+            deletee = input()
+            sql="delete from the passwordmanager where emailid = %s , weba = %s"
+            val =(deletee,delete)
+            mycursor.execute(sql,val)
+            mydb.commit()
+            print("the record has been deleted ") 
    if user_choice == 5:
       print("enter the website address\n")
       website=input()
